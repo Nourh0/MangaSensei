@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MangaSensei Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- القائمة الجانبية -->
+        <aside class="sidebar">
+            <div class="logo">Manga<span>Sensei</span></div>
+            <nav>
+                <ul>
+                    <li id="nav-dashboard" class="active" onclick="AppLogic.navigate('dashboard')">📚 <span data-i18n="nav_dash">المكتبة</span></li>
+                    <li id="nav-import" onclick="AppLogic.navigate('import')">📥 <span data-i18n="nav_import">استيراد</span></li>
+                    <li id="nav-review" onclick="AppLogic.navigate('review')">🔄 <span data-i18n="nav_review">مراجعة</span></li>
+                    <li id="nav-settings" onclick="AppLogic.navigate('settings')">⚙️ <span data-i18n="nav_settings">الإعدادات</span></li>
+                </ul>
+            </nav>
+            <!-- شريط مستوى الخبرة -->
+            <div class="level-box">
+                <p><span data-i18n="level">المستوى</span> <span id="user-level">1</span></p>
+                <div class="xp-bar"><div id="xp-fill" style="width: 20%;"></div></div>
+            </div>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            
+            <!-- الصفحة الرئيسية -->
+            <section id="dashboard-view" class="page-section active">
+                <header>
+                    <h1 data-i18n="welcome">أهلاً بك، مستكشف اللغات</h1>
+                    <p data-i18n="subtitle">رحلتك التعليمية تبدأ من هنا.</p>
+                </header>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span data-i18n="stat_cards">إجمالي البطاقات</span>
+                        <strong id="stat-total">0</strong>
+                    </div>
+                    <div class="stat-card highlight">
+                        <span data-i18n="stat_xp">نقاط الخبرة XP</span>
+                        <strong id="stat-xp">0</strong>
+                    </div>
+                </div>
+
+                <div class="reading-now-box">
+                    <div class="overlay-text">
+                        <h3 data-i18n="current_read">The Horizon - الفصل الأول</h3>
+                        <button class="btn-primary" onclick="AppLogic.openReader()" data-i18n="continue">استكمال القراءة ▶️</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- صفحة الاستيراد -->
+            <section id="import-view" class="page-section">
+                <div class="glass-box">
+                    <h2 data-i18n="import_title">📥 استيراد مانهو جديدة</h2>
+                    <div class="input-group">
+                        <input type="text" id="manga-url" placeholder="Webtoons URL...">
+                        <button class="btn-primary" onclick="AppLogic.handleImport()" data-i18n="btn_import">تحميل</button>
+                    </div>
+                    <div id="import-status"></div>
+                </div>
+            </section>
+
+            <!-- صفحة الإعدادات -->
+            <section id="settings-view" class="page-section">
+                <div class="glass-box settings-grid">
+                    <h2 data-i18n="settings_title">⚙️ الإعدادات</h2>
+                    
+                    <div class="setting-item">
+                        <label data-i18n="ui_lang">لغة التطبيق (UI Language)</label>
+                        <select id="ui-lang-select" onchange="AppLogic.changeUILanguage()">
+                            <option value="ar">العربية</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-item">
+                        <label data-i18n="target_lang">اللغة التي تريد تعلمها</label>
+                        <select id="target-lang-select" onchange="AppLogic.saveSettings()">
+                            <option value="ja-JP">اليابانية</option>
+                            <option value="en-US">الإنجليزية</option>
+                            <option value="ar-SA">العربية</option>
+                            <option value="ko-KR">الكورية</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-danger" onclick="AppLogic.resetApp()" data-i18n="reset">إعادة ضبط المصنع 🗑️</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- القارئ -->
+    <div id="reader-overlay" class="reader-mode">
+        <div class="reader-nav">
+            <button onclick="AppLogic.closeReader()" data-i18n="close">إغلاق ⬅️</button>
+            <h3 id="reader-title">Reader Mode</h3>
+        </div>
+        <div id="manga-scroll-container" class="manga-pages"></div>
+    </div>
+
+    <script src="audio-engine.js"></script>
+    <script src="app-logic.js"></script>
+</body>
+</html>
