@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MangaSensei Pro | Ultimate Learning</title>
+    <title>MangaSensei Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="app-container">
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">Manga<span>Sensei</span></div>
             <nav>
@@ -20,95 +18,58 @@
                     <li id="nav-settings" onclick="AppLogic.navigate('settings')">⚙️ <span data-i18n="nav_settings">الإعدادات</span></li>
                 </ul>
             </nav>
-
-            <!-- Leveling System UI -->
             <div class="user-progress">
-                <div class="level-info">
-                    <span data-i18n="level">المستوى</span> <span id="user-level">1</span>
-                </div>
-                <div class="xp-container">
-                    <div id="xp-bar-fill"></div>
-                </div>
+                <div class="level-info"><span data-i18n="level">المستوى</span> <span id="user-level">1</span></div>
+                <div class="xp-container"><div id="xp-bar-fill"></div></div>
                 <small><span id="current-xp">0</span> / 100 XP</small>
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
-            <!-- Dashboard -->
             <section id="dashboard-view" class="page-section active">
                 <div class="welcome-banner">
-                    <h1 data-i18n="welcome">مرحباً بك في رحلة التعلم</h1>
-                    <p data-i18n="subtitle">اقرأ المانهو، ظلل الكلمات، وتعلم اللغات بسهولة.</p>
+                    <h1 data-i18n="welcome">مرحباً بك</h1>
+                    <p data-i18n="subtitle">اقرأ وتعلم اللغات بسهولة.</p>
                 </div>
-
                 <div class="stats-grid">
-                    <div class="stat-card">
-                        <span data-i18n="stat_cards">البطاقات التعليمية</span>
-                        <strong id="stat-cards-val">0</strong>
-                    </div>
-                    <div class="stat-card accent">
-                        <span data-i18n="stat_xp">إجمالي الخبرة</span>
-                        <strong id="stat-xp-val">0</strong>
-                    </div>
+                    <div class="stat-card"><span data-i18n="stat_cards">البطاقات</span><strong id="stat-cards-val">0</strong></div>
+                    <div class="stat-card accent"><span data-i18n="stat_xp">الخبرة</span><strong id="stat-xp-val">0</strong></div>
                 </div>
-
                 <div class="featured-manga" onclick="AppLogic.openReader()">
-                    <div class="manga-badge">HOT</div>
-                    <div class="manga-details">
-                        <h3>The Horizon</h3>
-                        <button class="btn-read" data-i18n="continue">استكمال القراءة ▶️</button>
-                    </div>
+                    <button class="btn-read" data-i18n="continue">استكمال القراءة ▶️</button>
                 </div>
             </section>
 
-            <!-- Import Section -->
             <section id="import-view" class="page-section">
                 <div class="glass-panel">
-                    <h2 data-i18n="import_title">📥 استيراد من Webtoons</h2>
+                    <h2 data-i18n="import_title">📥 استيراد</h2>
                     <div class="input-group">
-                        <input type="text" id="manga-url-input" placeholder="https://www.webtoons.com/...">
+                        <input type="text" id="manga-url-input" placeholder="Webtoons URL...">
                         <button class="btn-action" onclick="AppLogic.handleImport()" data-i18n="btn_import">تحميل</button>
                     </div>
                     <div id="import-log"></div>
                 </div>
             </section>
 
-            <!-- Settings Section -->
             <section id="settings-view" class="page-section">
                 <div class="glass-panel">
                     <h2 data-i18n="settings_title">⚙️ الإعدادات</h2>
-                    <div class="setting-row">
-                        <label data-i18n="ui_lang">لغة التطبيق</label>
-                        <select id="ui-lang-selector" onchange="AppLogic.updateUILang()">
-                            <option value="ar">العربية</option>
-                            <option value="en">English</option>
-                        </select>
-                    </div>
-                    <div class="setting-row">
-                        <label data-i18n="target_lang">اللغة المستهدفة للتعلم</label>
-                        <select id="target-lang-selector" onchange="AppLogic.saveSettings()">
-                            <option value="ja-JP">اليابانية (Japanese)</option>
-                            <option value="en-US">الإنجليزية (English)</option>
-                            <option value="ko-KR">الكورية (Korean)</option>
-                        </select>
-                    </div>
-                    <button class="btn-danger" onclick="AppLogic.factoryReset()" data-i18n="reset">حذف جميع البيانات 🗑️</button>
+                    <select id="ui-lang-selector" onchange="AppLogic.updateUILang()">
+                        <option value="ar">العربية</option>
+                        <option value="en">English</option>
+                    </select>
+                    <button class="btn-danger" onclick="AppLogic.factoryReset()" data-i18n="reset">إعادة ضبط 🗑️</button>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- Reader Overlay -->
     <div id="reader-overlay" class="reader-view">
         <header class="reader-top-bar">
             <button class="btn-close" onclick="AppLogic.closeReader()">⬅️ <span data-i18n="close">إغلاق</span></button>
-            <h4 id="current-manga-name">The Horizon - Ch.1</h4>
-            <div class="reader-hints" data-i18n="hint">ظلل أي نص للترجمة والنطق</div>
+            <h4 data-i18n="hint">ظلل النص للنطق</h4>
         </header>
-        <div id="manga-scroll-view" class="manga-images-container">
-            <!-- Images Injected via JS -->
-        </div>
+        <div id="manga-scroll-view" class="manga-images-container"></div>
     </div>
 
     <script src="audio-engine.js"></script>
